@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Tickets</title>
+    <link rel="stylesheet" href="home.component.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="content">
+        <div class="booking-form">
+          <h2>Book a seat now</h2>
+          <!-- Use (ngSubmit) to trigger onSubmit() method -->
+          <form (ngSubmit)="onSubmit()" method="post">
+            <select id="fromStation" name="fromStation" [(ngModel)]="fromStation" class="stations"  required>
+              <option value="station" selected disabled>From Station</option>
+              <option value="Machilipatnam">Machilipatnam</option>
+              <option value="Vijayawada">Vijayawada</option>
+              <option value="Gudiwada">Gudiwada</option>
+            </select>
+            <select id="toStation" name="toStation" [(ngModel)]="toStation" class="stations" required>
+              <option value="station" selected disabled>To Station</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Bengaluru">Bengaluru</option>
+            </select>
+            <input type="date" id="departureDate" name="departureDate" [(ngModel)]="departureDate" required>
+            <!-- Use type="submit" to trigger form submission -->
+            <button type="submit">Search Buses</button>
+          </form>
+        </div>
+      </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+.content {
+    width: 400px;
+    height: 420px;
+    background-color: white;
+    display: flex;
+    flex-direction: column; /* Set flex direction to column for vertical alignment */
+    padding: 20px;
+    position: relative;
+    top: 180px;
+    left: 800px;
+    border-radius: 10px;
+}
+
+h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    margin-top: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+}
+
+.booking-form {
+    margin: 25px 0; /* Adjust margin for better spacing */
+}
+
+input, .stations {
+    width: 100%; /* Set width to 100% for responsiveness */
+    height: 60px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    font-size: 25px;
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.booking-form button {
+    width: 100%; /* Set width to 100% for responsiveness */
+    height: 50px;
+    margin-top: 10px;
+    border-radius: 30px;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+}

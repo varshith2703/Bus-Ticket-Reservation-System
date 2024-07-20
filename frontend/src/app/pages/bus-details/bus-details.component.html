@@ -1,0 +1,27 @@
+<div *ngIf="buses.length > 0; else noBusesMessage">
+    <div class="route-details">
+      <h2>Route Details:</h2>
+      <p><strong> {{ buses[0]?.fromStation }} - {{ buses[0]?.toStation }}</strong></p>
+      <p><strong>Departure Date:</strong> {{ buses[0]?.departureDate | date }}</p>
+    </div>
+    <div class="busesavailable">
+      <h2>Buses Available:</h2>
+    </div>
+    <div class="bus-list">
+      <div *ngFor="let bus of buses" class="bus-card">
+        <h3>{{ bus.name }}</h3>
+        <p class="time"><strong>Departure:</strong> {{ bus.departureTime }}</p>
+        <p class="time"><strong>Arrival:</strong> {{ bus.arrivalTime }}</p>
+        <p class="price"><strong>Price:</strong> {{ bus.price }}</p>
+        <button (click)="viewSeats(bus)">View Seats</button>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #noBusesMessage>
+    <div class="nobuses-message">
+      No buses available for the selected route and date.<br>
+      <button routerLink="/home">Search Again</button>
+    </div>
+  </ng-template>
+  

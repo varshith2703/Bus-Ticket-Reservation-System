@@ -1,0 +1,42 @@
+<div *ngIf="bookings.length === 0" class="no-bookings">
+    <p>No bookings available.</p>
+  </div>
+  
+  <div class="bus-details" *ngFor="let booking of bookings">
+    <h2>My Bookings:</h2>
+    <hr>
+    <h2>Bus Details</h2>
+    <div>
+      <p class="bus-name"><strong>Bus Name:</strong> {{ name }}</p>
+      <p class="from-station"><strong>From Station:</strong> {{ fromStation }}</p>
+      <p class="to-station"><strong>To Station:</strong> {{ toStation }}</p>
+      <p class="departure-time"><strong>Departure Time:</strong> {{ departureTime }}</p>
+      <p class="arrival-time"><strong>Arrival Time:</strong> {{ arrivalTime }}</p>
+    </div>
+    <hr>
+    <h2>Passenger Details</h2>
+    <table class="passenger-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Phone Number</th>
+          <th>Seat No.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let passenger of booking.passengers">
+          <td>{{ passenger.name }}</td>
+          <td>{{ passenger.age }}</td>
+          <td>{{ passenger.gender }}</td>
+          <td>{{ passenger.phoneNumber }}</td>
+          <td>{{ passenger.seatNo }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+    <h2>Payment Details</h2>
+    <p class="total-amount"><strong>Amount Paid: </strong> {{ booking.payableAmount }}/-</p>
+  </div>
+  

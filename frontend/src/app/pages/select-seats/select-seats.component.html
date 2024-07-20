@@ -1,0 +1,108 @@
+<div *ngIf="selectedBus" class="bus-details">
+    <h2 class="bus-name">{{ selectedBus.name }}</h2>
+    <div class="details">
+      <div><strong>{{ selectedBus.fromStation }} -  {{ selectedBus.toStation }}</strong></div>
+      <div><strong>Departure:</strong> {{ selectedBus.departureTime }}</div>
+      <div><strong>Arrival:</strong> {{ selectedBus.arrivalTime }}</div>
+      <div><strong>Price:</strong> {{ selectedBus.price }}</div>
+    </div>
+</div>
+<div class="total">
+<div class="seating-container">
+    <strong>Bus Seating:</strong>
+    <p>Driver</p>
+    <hr>
+    <!-- Row 1 -->
+    <div class="bus-row">
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('1A'), 'unavailable': !isSeatAvailable('1A') }">1A</div>
+        <div class="aisle"></div> <!-- Aisle between columns 1 and 2 -->
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('1B'), 'unavailable': !isSeatAvailable('1B') }">1B</div>
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('1C'), 'unavailable': !isSeatAvailable('1C') }">1C</div>
+    </div>
+    <!-- Row 2 -->
+    <div class="bus-row">
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('2A'), 'unavailable': !isSeatAvailable('2A') }">2A</div>
+        <div class="aisle"></div> <!-- Aisle between columns 1 and 2 -->
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('2B'), 'unavailable': !isSeatAvailable('2B') }">2B</div>
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('2C'), 'unavailable': !isSeatAvailable('2C') }">2C</div>
+    </div>
+    <!-- Row 3 -->
+    <div class="bus-row">
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('3A'), 'unavailable': !isSeatAvailable('3A') }">3A</div>
+        <div class="aisle"></div> <!-- Aisle between columns 1 and 2 -->
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('3B'), 'unavailable': !isSeatAvailable('3B') }">3B</div>
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('3C'), 'unavailable': !isSeatAvailable('3C') }">3C</div>
+    </div>
+    <!-- Row 4 -->
+    <div class="bus-row">
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('4A'), 'unavailable': !isSeatAvailable('4A') }">4A</div>
+        <div class="aisle"></div> <!-- Aisle between columns 1 and 2 -->
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('4B'), 'unavailable': !isSeatAvailable('4B') }">4B</div>
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('4C'), 'unavailable': !isSeatAvailable('4C') }">4C</div>
+    </div>
+    <!-- Row 5 -->
+    <div class="bus-row">
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('5A'), 'unavailable': !isSeatAvailable('5A') }">1A</div>
+        <div class="aisle"></div> <!-- Aisle between columns 1 and 2 -->
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('5B'), 'unavailable': !isSeatAvailable('5B') }">1B</div>
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('5C'), 'unavailable': !isSeatAvailable('5C') }">1C</div>
+    </div>
+    <!-- Row 6 -->
+    <div class="bus-row">
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('6A'), 'unavailable': !isSeatAvailable('6A') }">6A</div>
+        <div class="aisle"></div> <!-- Aisle between columns 1 and 2 -->
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('6B'), 'unavailable': !isSeatAvailable('6B') }">6B</div>
+        <div class="seat" [ngClass]="{ 'available': isSeatAvailable('6C'), 'unavailable': !isSeatAvailable('6C') }">6C</div>
+    </div>
+    <hr>
+    <div class="indicators-1">
+        <div class="booked"></div>
+        <p>- Booked Seats</p>
+    </div>
+    <div class="indicators-2">
+        <div class="free"></div>
+        <p>- Available Seats</p>
+    </div>
+</div>
+
+<div class="passenger-form">
+    <h2>Passenger Details</h2>
+    <form (ngSubmit)="proceedToNextPage()">
+        <div *ngFor="let passenger of passengers; let i = index" class="passenger-fields">
+            <h3>Passenger {{ i + 1 }}</h3>
+            <div class="form-group">
+                <label for="name{{i}}">Name</label>
+                <input type="text" id="name{{i}}" name="name{{i}}" [(ngModel)]="passenger.name" required>
+            </div>
+            <div class="form-group">
+                <label for="age{{i}}">Age</label>
+                <input type="number" id="age{{i}}" name="age{{i}}" [(ngModel)]="passenger.age" required>
+            </div>
+            <div class="form-group">
+                <label for="gender{{i}}">Gender</label>
+                <select id="gender{{i}}" name="gender{{i}}" [(ngModel)]="passenger.gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber{{i}}">Phone Number</label>
+                <input type="text" id="phoneNumber{{i}}" name="phoneNumber{{i}}" [(ngModel)]="passenger.phoneNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="seatNo{{i}}">Seat Number</label>
+                <input type="text" id="seatNo{{i}}" name="seatNo{{i}}" [(ngModel)]="passenger.seatNo" required>
+            </div>
+        </div>
+
+        <!-- Buttons for adding/removing passengers -->
+        <div class="button-container">
+            <button type="button" (click)="addPassenger()">Add Passenger</button>
+            <button type="button" (click)="removePassenger()" *ngIf="passengers.length > 1">Remove Passenger</button>
+        </div>
+
+        <!-- Button to proceed to the next page -->
+        <button type="submit">Proceed</button>
+    </form>
+
+</div>

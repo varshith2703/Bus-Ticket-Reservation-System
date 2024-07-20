@@ -1,0 +1,88 @@
+<div class="whole">
+<div class="container-1">
+  <div *ngIf="busName && fromStation && toStation" class="bus-details">
+    <hr>
+    <h2 class="bus-name">{{ busName }}</h2>
+    <div class="details">
+      <div><strong>{{ fromStation }} - {{ toStation }}</strong></div>
+    </div>
+    <hr>
+  </div>
+
+  <div class="passenger-details">
+    <h2>Passenger Details</h2>
+    <hr>
+    <div *ngFor="let passenger of passengerDetails; let i = index" class="passenger">
+      <h3>Passenger - {{ i + 1 }}:</h3>
+      <table class="passenger-table">
+        <tr><td><strong>Name:</strong></td><td>{{ passenger.name }}</td></tr>
+        <tr><td><strong>Age:</strong></td><td>{{ passenger.age }}</td></tr>
+        <tr><td><strong>Gender:</strong></td><td>{{ passenger.gender }}</td></tr>
+        <tr><td><strong>Phone Number:</strong></td><td>{{ passenger.phoneNumber }}</td></tr>
+        <tr><td><strong>Seat Number:</strong></td><td>{{ passenger.seatNo }}</td></tr>
+        <tr><td><strong>Price:</strong></td><td>{{ passengerPrices[i] }}/-</td></tr>
+      </table>
+      <button (click)="toggleDetails(i)">
+        {{ showDetails[i] ? 'Hide Details' : 'Show Details' }}
+      </button>
+      <div *ngIf="showDetails[i]">
+        <div><strong>Original Price:</strong> {{ bprice }}/-</div>
+        <div *ngIf="pgage[i] < 10">
+          <div><strong>Child (25% off):</strong> -{{ bprice * 0.25 }}/-</div>
+        </div>
+        <div *ngIf="65 < pgage[i]">
+          <div><strong>Adult (15% off):</strong> -{{ bprice * 0.15 }}/-</div>
+        </div>
+        <div *ngIf="passenger.seatNo.includes('A') || passenger.seatNo.includes('C')">
+          <div><strong>Window seat:</strong> +200/-</div>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <div class="total-price">
+    <table class="passenger-table">
+      <tr><td><strong>Total Price:</strong></td><td>{{ totalPrice }}/-</td></tr>
+      <tr><td><strong>GST:</strong> </td><td>+{{ gst }}/-</td></tr>
+      <tr><td><strong>Final Amount:</strong></td><td> {{ finalAmount }}/-</td></tr>
+    </table>
+  </div>
+</div>
+<div class="payment-options">
+  <h2>Select Payment Option</h2>
+  <hr>
+  <button (click)="togglePaymentDetails('upi')">UPI</button>
+  <button (click)="togglePaymentDetails('credit')">Credit Card</button>
+  <button (click)="togglePaymentDetails('debit')">Debit Card</button>
+  <div *ngIf="showPaymentDetails['upi']">
+    <h3>UPI Details</h3>
+    <table>
+      <tr><td colspan="2"><input type=text placeholder="Enter upi id"></td></tr>
+      <tr><td><strong>Final Amount:</strong></td><td>{{ finalAmount }}/-</td></tr>
+      <tr><td><strong>Tax:</strong>(3%)</td><td>{{ finalAmount * 0.03 | number: '1.2-2' }}/-</td></tr>
+      <tr><td><strong>Payable Amount:</strong></td><td>{{ (finalAmount * 0.03 + finalAmount) | number: '1.2-2' }}/-</td></tr>
+    </table>
+    <button (click)="confirmPayment('upi')">Confirm Payment</button>
+  </div>
+  <div *ngIf="showPaymentDetails['credit']">
+    <h3>Credit Card Details</h3>
+    <table>
+      <tr><td colspan="2"><input type=text placeholder="Enter credit card no."></td></tr>
+      <tr><td><strong>Final Amount:</strong></td><td>{{ finalAmount }}/-</td></tr>
+      <tr><td><strong>Tax:</strong>(1%)</td><td>{{ finalAmount * 0.01 | number: '1.2-2' }}/-</td></tr>
+      <tr><td><strong>Payable Amount:</strong></td><td>{{ (finalAmount * 0.01 + finalAmount) | number: '1.2-2' }}/-</td></tr>
+    </table>
+    <button (click)="confirmPayment('credit')">Confirm Payment</button>
+  </div>
+  <div *ngIf="showPaymentDetails['debit']">
+    <h3>Debit Card Details</h3>
+    <table>
+      <tr><td colspan="2"><input type=text placeholder="Enter debit card no."></td></tr>
+      <tr><td><strong>Final Amount:</strong></td><td>{{ finalAmount }}/-</td></tr>
+      <tr><td><strong>Tax:</strong>(2%)</td><td>{{ finalAmount * 0.02 | number: '1.2-2' }}/-</td></tr>
+      <tr><td><strong>Payable Amount:</strong></td><td>{{ (finalAmount * 0.02 + finalAmount) | number: '1.2-2' }}/-</td></tr>
+    </table>
+    <button (click)="confirmPayment('debit')">Confirm Payment</button>
+  </div>
+</div>
+</div>
